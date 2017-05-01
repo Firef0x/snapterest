@@ -1,0 +1,43 @@
+{
+  "name": "snapterest",
+  "version": "0.0.1",
+  "description": "Firefgx's Snapterest Demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "react": "^0.14.9",
+    "react-dom": "^0.14.9",
+    "snapkite-stream-client": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.8",
+    "browserify": "^14.3.0",
+    "enzyme": "^2.8.2",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.1.2",
+    "jest-cli": "^19.0.2",
+    "react-addons-test-utils": "^0.14.8",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
+}
