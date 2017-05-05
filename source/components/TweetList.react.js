@@ -3,7 +3,6 @@
  */
 var React = require('react');
 var Tweet = require('./Tweet.react');
-var getListOfTweetIds = require('../utils/TweetUtils').getListOfTweetIds;
 
 var listStyle = {
     padding: '0'
@@ -15,7 +14,9 @@ var listItemStyle = {
 };
 
 var TweetList = React.createClass({
-    getListOfTweetIds: getListOfTweetIds,
+    getListOfTweetIds: function () {
+        return Object.keys(this.props.tweets);
+    },
 
     getTweetElement: function (tweetId) {
         var tweet = this.props.tweets[tweetId];

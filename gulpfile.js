@@ -4,7 +4,6 @@ var browserSync=require("browser-sync").create();
 var babelify=require("babelify");
 var vinylSource=require("vinyl-source-stream");
 var buffer=require("vinyl-buffer");
-var uglify=require('gulp-uglify');
 
 var source = {
 	script: ["source/**/*.js", "source/**/*.jsx"]
@@ -19,7 +18,6 @@ gulp.task("browserify", function () {
 		   .bundle()
 		   .pipe(vinylSource('snapterest.js'))
 		   .pipe(buffer())
-//		   .pipe(uglify())
 		   .pipe(gulp.dest(dest.script));
 });
 

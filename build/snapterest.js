@@ -27082,36 +27082,6 @@ var ReactDOM = require('react-dom');
 var Application = require('./components/Application.react');
 
 ReactDOM.render(React.createElement(Application, null), document.getElementById('react-application'));
-/*var ReactClass = React.createClass({
-    getInitialState: function () {
-        return {
-            isHeaderHidden: false,
-            title: 'Stateful React Component'
-        };
-    },
-
-    handleClick: function () {
-        this.setState({
-            isHeaderHidden: !this.state.isHeaderHidden
-        })
-    },
-
-    render: function () {
-        var headerElement = <h1 className="header" key="header">{this.state.title}</h1>;
-        var buttonElement = <button className="btn btn-default" onClick={this.handleClick} key="button">
-                                Toggle Header
-                            </button>;
-        if (this.state.isHeaderHidden) {
-            return React.createElement("div", null, [buttonElement]);
-        }
-        return React.createElement("div", null, [headerElement,buttonElement]);
-    }
-});
-
-var ReactComponentElement=React.createElement(ReactClass);
-var ReactComponent=ReactDOM.render(ReactComponentElement,
-                    document.getElementById('react-application'));
-*/
 
 },{"./components/Application.react":215,"react":194,"react-dom":64}],215:[function(require,module,exports){
 /**
@@ -27720,7 +27690,6 @@ module.exports = Tweet;
  */
 var React = require('react');
 var Tweet = require('./Tweet.react');
-var getListOfTweetIds = require('../utils/TweetUtils').getListOfTweetIds;
 
 var listStyle = {
     padding: '0'
@@ -27734,7 +27703,9 @@ var listItemStyle = {
 var TweetList = React.createClass({
     displayName: 'TweetList',
 
-    getListOfTweetIds: getListOfTweetIds,
+    getListOfTweetIds: function () {
+        return Object.keys(this.props.tweets);
+    },
 
     getTweetElement: function (tweetId) {
         var tweet = this.props.tweets[tweetId];
@@ -27768,14 +27739,4 @@ var TweetList = React.createClass({
 
 module.exports = TweetList;
 
-},{"../utils/TweetUtils":226,"./Tweet.react":224,"react":194}],226:[function(require,module,exports){
-/**
- * Created by F on 2017/4/29.
- */
-function getListOfTweetIds(tweets) {
-  return Object.keys(tweets);
-}
-
-module.exports.getListOfTweetIds = getListOfTweetIds;
-
-},{}]},{},[214]);
+},{"./Tweet.react":224,"react":194}]},{},[214]);
