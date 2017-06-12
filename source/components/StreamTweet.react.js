@@ -5,8 +5,13 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Tweet = require('./Tweet.react');
 var Header = require('./Header.react');
+var CollectionActionCreator = require('../actions/CollectionActionCreators');
 
 var StreamTweet = React.createClass({
+    addTweetToCollection: function (tweet) {
+        CollectionActionCreator.addTweetToCollection(tweet);
+    },
+
     getInitialState: function () {
         console.log("[Snapterest] StreamTweet: 1. 运行初始化状态方法");
 
@@ -81,7 +86,7 @@ var StreamTweet = React.createClass({
                 <Header text={this.state.headerText} />
                 <Tweet
                     tweet={this.props.tweet}
-                    onImageClick={this.props.onAddTweetToCollection} />
+                    onImageClick={this.addTweetToCollection} />
             </section>
         );
     },

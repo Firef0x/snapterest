@@ -6,21 +6,23 @@ var Header = require('./Header.react');
 var Button = require('./Button.react');
 var CollectionRenameForm = require('./CollectionRenameForm.react');
 var CollectionExportForm = require('./CollectionExportForm.react');
+var CollectionActionCreator = require('../actions/CollectionActionCreators');
+var CollectionStore = require('../stores/CollectionStore');
 
 var CollectionControls = React.createClass({
     getInitialState: function () {
         return {
-            name: 'new',
             isEditingName: false
         };
     },
 
     getHeaderText: function () {
         var numberOfTweetsInCollection = this.props.numberOfTweetsInCollection;
-        var text = " 中有 " + numberOfTweetsInCollection + " 条推特."
+        var collectionName = CollectionStore.getCollectionName();
+        var text = " 中有 " + numberOfTweetsInCollection + " 条推特.";
 
         return (
-            <span>专辑 <strong>{this.state.name}</strong>{text}</span>
+            <span>专辑 <strong>{collectionName}</strong>{text}</span>
         );
     },
 
@@ -30,18 +32,22 @@ var CollectionControls = React.createClass({
         });
     },
 
-    setCollectionName: function (name) {
+    setCollectionName: function () {
         this.setState({
-            name: name,
             isEditingName: false
         });
     },
 
+    removeAllTweetsFromCollection: function () {
+        CollectionActionCreator.removeAllTweetsFromCollection();
+    },
+
     render: function () {
         if (this.state.isEditingName) {
+            var collectionName = CollectionStore.getCollectionName();
             return (
                 <CollectionRenameForm
-                    name={this.state.name}
+                    name={collectionName}
                     onChangeCollectionName={this.setCollectionName}
                     onCancelCollectionNameChange={this.toggleEditCollectionName}
                     />
@@ -55,7 +61,7 @@ var CollectionControls = React.createClass({
                         handleClick={this.toggleEditCollectionName}
                         />
                 <Button label="清空专辑"
-                        handleClick={this.props.onRemoveAllTweetsFromCollection}
+                        handleClick={this.removeAllTweetsFromCollection}
                         />
                 <CollectionExportForm htmlMarkup={this.props.htmlMarkup} />
                 </div>

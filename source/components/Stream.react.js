@@ -2,34 +2,28 @@
  * Created by F on 2017/4/20.
  */
 var React = require('react');
-var SnapkiteStreamClient = require('snapkite-stream-client');
 var StreamTweet = require('./StreamTweet.react');
 var Header = require('./Header.react');
-var SnapkiteConfig = {
-  hostname: "212.47.229.222",
-  port: 3000,
-  delayInMilliseconds: 1500,
-  cacheNumberOfTweets: 20
-};
+var TweetStore = require('../stores/TweetStore');
 
 var Stream = React.createClass({
     getInitialState: function () {
         return {
-            tweet: null
+            tweet: TweetStore.getTweet()
         };
     },
 
     componentDidMount: function () {
-        SnapkiteStreamClient.initialiseStream(this.handleNewTweet, SnapkiteConfig);
+        TweetStore.addChangeListener(this.onTweetChange);
     },
 
     componentWillUnmount: function () {
-        SnapkiteStreamClient.destroyStream();
+        TweetStore.removeChangeListener(this.onTweetChange);
     },
 
-    handleNewTweet: function (tweet) {
+    onTweetChange: function () {
         this.setState({
-            tweet: tweet
+            tweet: TweetStore.getTweet()
         });
     },
 
@@ -38,7 +32,7 @@ var Stream = React.createClass({
 
         if (tweet) {
             return (
-                <StreamTweet tweet={tweet} onAddTweetToCollection={this.props.onAddTweetToCollection} />
+                <StreamTweet tweet={tweet} />
             );
         }
         return (
