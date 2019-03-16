@@ -1,19 +1,17 @@
 /**
  * Created by F on 2017/5/1.
  */
+import getListOfTweetIds from './TweetUtils';
 
-function getNumberOfTweetsInCollection(collection) {
-    var TweetUtils = require('./TweetUtils');
-    var listOfCollectionTweetIds = TweetUtils.getListOfTweetIds(collection);
+const getNumberOfTweetsInCollection = collection => (
+  getListOfTweetIds(collection).length
+);
 
-    return listOfCollectionTweetIds.length;
-}
+const isEmptyCollection = collection => (
+  getNumberOfTweetsInCollection(collection) === 0
+);
 
-function isEmptyCollection (collection) {
-    return (getNumberOfTweetsInCollection(collection) === 0);
-}
-
-module.exports = {
-    getNumberOfTweetsInCollection: getNumberOfTweetsInCollection,
-    isEmptyCollection: isEmptyCollection
+export {
+  getNumberOfTweetsInCollection,
+  isEmptyCollection
 };

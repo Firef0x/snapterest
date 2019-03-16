@@ -1,17 +1,21 @@
 /**
  * Created by F on 2017/5/5.
  */
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+import { RECEIVE_TWEET } from './actionTypes';
 
 function receiveTweet(tweet) {
-    var action = {
-        type: 'receive_tweet',
-        tweet: tweet
+  return (dispatch) => {
+    const action = {
+      type: RECEIVE_TWEET,
+      payload: {
+        tweet
+      }
     };
 
-    AppDispatcher.dispatch(action);
+    dispatch(action);
+  };
 }
 
-module.exports = {
-    receiveTweet: receiveTweet
+export {
+  receiveTweet as default
 };

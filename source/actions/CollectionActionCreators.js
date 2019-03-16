@@ -1,46 +1,66 @@
 /**
  * Created by F on 2017/5/5.
  */
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+import {
+  ADD_TWEET_TO_COLLECTION,
+  REMOVE_TWEET_FROM_COLLECTION,
+  REMOVE_ALL_TWEETS_FROM_COLLECTION,
+  SET_COLLECTION_NAME
+} from './actionTypes';
 
 function addTweetToCollection(tweet) {
-    var action = {
-        type: 'add_tweet_to_collection',
-        tweet: tweet
+  return (dispatch) => {
+    const action = {
+      type: ADD_TWEET_TO_COLLECTION,
+      payload: {
+        tweet
+      }
     };
 
-    AppDispatcher.dispatch(action);
+    dispatch(action);
+  };
 }
 
-function removeTweetFromCollection(tweetId) {
-    var action = {
-        type: 'remove_tweet_from_collection',
-        tweet: tweetId
+function removeTweetFromCollection(tweet) {
+  return (dispatch) => {
+    const action = {
+      type: REMOVE_TWEET_FROM_COLLECTION,
+      payload: {
+        tweet
+      }
     };
 
-    AppDispatcher.dispatch(action);
+    dispatch(action);
+  };
 }
 
 function removeAllTweetsFromCollection() {
-    var action = {
-        type: 'remove_all_tweets_from_collection'
+  return (dispatch) => {
+    const action = {
+      type: REMOVE_ALL_TWEETS_FROM_COLLECTION,
+      payload: {}
     };
 
-    AppDispatcher.dispatch(action);
+    dispatch(action);
+  };
 }
 
 function setCollectionName(collectionName) {
-    var action = {
-        type: 'set_collection_name',
-        collectionName: collectionName
+  return (dispatch) => {
+    const action = {
+      type: SET_COLLECTION_NAME,
+      payload: {
+        collectionName
+      }
     };
 
-    AppDispatcher.dispatch(action);
+    dispatch(action);
+  };
 }
 
-module.exports = {
-    addTweetToCollection: addTweetToCollection,
-    removeTweetFromCollection: removeTweetFromCollection,
-    removeAllTweetsFromCollection: removeAllTweetsFromCollection,
-    setCollectionName: setCollectionName,
+export {
+  addTweetToCollection,
+  removeTweetFromCollection,
+  removeAllTweetsFromCollection,
+  setCollectionName
 };
